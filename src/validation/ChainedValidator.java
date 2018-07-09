@@ -8,19 +8,16 @@ public class ChainedValidator implements Validator{
 
 		ValidationFailedObject validationMinLengthFailed = validateUsing(
 				minimumLengthValidator(), userInput);
-		if (validationMinLengthFailed != null) {
+		if (validationMinLengthFailed != null)
 			return validationMinLengthFailed;
-		}
 		ValidationFailedObject validationNumericFailed = validateUsing(
 				numericCharactersValidator(), userInput);
-		if (validationNumericFailed != null) {
+		if (validationNumericFailed != null)
 			return validationNumericFailed;
-		}
 		ValidationFailedObject validationUpperCaseFailed = validateUsing(
 				upperCaseCharactersValidator(), userInput);
-		if (validationUpperCaseFailed != null) {
+		if (validationUpperCaseFailed != null)
 			return validationUpperCaseFailed;
-		}
 		return null;
 	}
 
@@ -31,8 +28,7 @@ public class ChainedValidator implements Validator{
 
 	private Validator upperCaseCharactersValidator() {
 		return input -> input.matches(".*[A-Z]+.*") ? null
-				: new ValidationFailedObject(
-						"Should contain an upper case letter");
+				: new ValidationFailedObject("Should contain an upper case letter");
 	}
 
 	private Validator minimumLengthValidator() {
@@ -44,17 +40,5 @@ public class ChainedValidator implements Validator{
 	private ValidationFailedObject validateUsing(Validator validator,
 			String userInput) {
 		return validator.validate(userInput);
-	}
-	
-	public static void main(String[] args) {
-		ValidationFailedObject validate1 = new ChainedValidator()
-				.validate("abc");
-		ValidationFailedObject validate2 = new ChainedValidator()
-				.validate("abcdeff12");
-		ValidationFailedObject validate3 = new ChainedValidator()
-				.validate("abcfffCef");
-		ValidationFailedObject validate4 = new ChainedValidator()
-				.validate("abcCeff12");
-
 	}
 }
