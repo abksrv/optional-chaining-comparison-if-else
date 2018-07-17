@@ -13,6 +13,9 @@ public class ChainedValidator implements Validator{
 								userInput)).map(Optional::of)
 				.orElseGet(() -> validateUsing(upperCaseCharactersValidator(),
 								userInput));
+		/*return validateUsing(minimumLengthValidator(), userInput)
+				.or(() -> validateUsing(numericCharactersValidator(), userInput))
+				.or(() -> validateUsing(upperCaseCharactersValidator(), userInput));*/
 	}
 
 	private Validator numericCharactersValidator() {
@@ -34,5 +37,10 @@ public class ChainedValidator implements Validator{
 	private Optional<ValidationFailedObject> validateUsing(Validator validator,
 			String userInput) {
 		return validator.validate(userInput);
+	}
+	
+	public static void main(String[] args) {
+		Optional<ValidationFailedObject> validate = new ChainedValidator().validate("ZemenskyabC");
+		validate.ifPresent(obj -> System.out.println(obj));
 	}
 }
