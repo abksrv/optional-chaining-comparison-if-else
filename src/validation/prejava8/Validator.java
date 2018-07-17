@@ -1,4 +1,4 @@
-package validation;
+package validation.prejava8;
 
 
 @FunctionalInterface

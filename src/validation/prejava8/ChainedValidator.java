@@ -1,4 +1,4 @@
-package validation;
+package validation.prejava8;
 
 public class ChainedValidator implements Validator{
 
